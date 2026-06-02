@@ -1,11 +1,11 @@
 import re
 import os
-import time
-import datetime
 
-id_pattern = re.compile(r'^.\d+$')
+id_pattern = re.compile(r'^.\d+$') 
 
-    BOT_TOKEN = os.environ.get("8073548594:AAHVF6_pjFlCBVqmqvEqjPCxK0FyzZKAvOA")
+class Config:
+
+    BOT_TOKEN = os.environ.get("")
 
     SESSION_NAME = ":memory:"
 
