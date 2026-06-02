@@ -1,11 +1,9 @@
-import re, os, time
+import re
+import os
+import time
 import datetime
 
-
-id_pattern = re.compile(r'^.\d+$') 
-
-
-class Config:
+id_pattern = re.compile(r'^.\d+$')
 
     BOT_TOKEN = os.environ.get("8073548594:AAHVF6_pjFlCBVqmqvEqjPCxK0FyzZKAvOA")
 
