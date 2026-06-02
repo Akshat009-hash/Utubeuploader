@@ -1,4 +1,5 @@
 from pyrogram import filters as Filters
+from pyrogram.enums import ChatAction
 from pyrogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
@@ -15,20 +16,43 @@ from ..utubebot import UtubeBot
 def map_btns(pos):
     if pos == 1:
         button = [[InlineKeyboardButton(text="-->", callback_data="help+2")]]
+
     elif pos == len(tr.HELP_MSG) - 1:
-        auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
+        auth = GoogleAuth(
+            Config.CLIENT_ID,
+            Config.CLIENT_SECRET
+        )
         url = auth.GetAuthUrl()
+
         button = [
-            [InlineKeyboardButton(text="<--", callback_data=f"help+{pos-1}")],
-            [InlineKeyboardButton(text="Login URL", url=url)],
+            [
+                InlineKeyboardButton(
+                    text="<--",
+                    callback_data=f"help+{pos-1}"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Login URL",
+                    url=url
+                )
+            ],
         ]
+
     else:
         button = [
             [
-                InlineKeyboardButton(text="<--", callback_data=f"help+{pos-1}"),
-                InlineKeyboardButton(text="-->", callback_data=f"help+{pos+1}"),
+                InlineKeyboardButton(
+                    text="<--",
+                    callback_data=f"help+{pos-1}"
+                ),
+                InlineKeyboardButton(
+                    text="-->",
+                    callback_data=f"help+{pos+1}"
+                ),
             ],
         ]
+
     return button
 
 
@@ -39,29 +63,52 @@ def map_btns(pos):
     & Filters.user(Config.AUTH_USERS)
 )
 async def _help(c: UtubeBot, m: Message):
-    await m.reply_chat_action("typing")
+    await m.reply_chat_action(
+        ChatAction.TYPING
+    )
+
     await m.reply_text(
         text=tr.HELP_MSG[1],
-        reply_markup=InlineKeyboardMarkup(map_btns(1)),
+        reply_markup=InlineKeyboardMarkup(
+            map_btns(1)
+        ),
     )
 
 
 help_callback_filter = Filters.create(
-    lambda _, __, query: query.data.startswith("help+")
+    lambda _, __, query:
+    query.data.startswith("help+")
 )
 
 
-@UtubeBot.on_callback_query(help_callback_filter)
-async def help_answer(c: UtubeBot, q: CallbackQuery):
-    pos = int(q.data.split("+")[1])
+@UtubeBot.on_callback_query(
+    help_callback_filter
+)
+async def help_answer(
+    c: UtubeBot,
+    q: CallbackQuery
+):
+    pos = int(
+        q.data.split("+")[1]
+    )
+
     await q.answer()
+
     await q.edit_message_text(
-        text=tr.HELP_MSG[pos], reply_markup=InlineKeyboardMarkup(map_btns(pos))
+        text=tr.HELP_MSG[pos],
+        reply_markup=InlineKeyboardMarkup(
+            map_btns(pos)
+        ),
     )
 
 
-auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
+auth = GoogleAuth(
+    Config.CLIENT_ID,
+    Config.CLIENT_SECRET
+)
+
 url = auth.GetAuthUrl()
+
 
 @UtubeBot.on_message(
     Filters.private
@@ -69,31 +116,49 @@ url = auth.GetAuthUrl()
     & Filters.command("login")
     & Filters.user(Config.AUTH_USERS)
 )
-async def _login(c: UtubeBot, m: Message):
-    await m.reply_chat_action("typing")
+async def _login(
+    c: UtubeBot,
+    m: Message
+):
+    await m.reply_chat_action(
+        ChatAction.TYPING
+    )
+
     await m.reply_text(
         text=tr.LOGIN_MSG,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="Authentication URL", url=url)]]
-     )
-)
+            [[
+                InlineKeyboardButton(
+                    text="Authentication URL",
+                    url=url
+                )
+            ]]
+        )
+    )
+
 
 @UtubeBot.on_message(
-
     Filters.private
-
     & Filters.incoming
-
     & Filters.command("upgrade")
-
 )
+async def _upgrade(
+    c: UtubeBot,
+    m: Message
+):
+    await m.reply_chat_action(
+        ChatAction.TYPING
+    )
 
-async def _upgrade(c: UtubeBot, m: Message):
-    await m.reply_chat_action("typing")
     await m.reply_text(
         text=tr.UPGRADE_MSG,
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="Subscription Details", url="https://t.me/+97tA4_TrzyowMjk1")]]
-     )
-)
+            [[
+                InlineKeyboardButton(
+                    text="Subscription Details",
+                    url="https://t.me/+97tA4_TrzyowMjk1"
+                )
+            ]]
+        )
+    )
