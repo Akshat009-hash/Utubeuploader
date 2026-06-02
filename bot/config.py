@@ -11,9 +11,9 @@ class Config:
 
     SESSION_NAME = ":memory:"
 
-    API_ID = os.environ.get("")
+    API_ID = os.environ.get("API_ID")
 
-    API_HASH = os.environ.get("")
+    API_HASH = os.environ.get("API_HASH")
 
     CLIENT_ID = os.environ.get("CLIENT_ID")
 
