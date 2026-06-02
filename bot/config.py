@@ -7,13 +7,13 @@ id_pattern = re.compile(r'^.\d+$')
 
 class Config:
 
-    BOT_TOKEN = os.environ.get("BOT_TOKEN")
+    BOT_TOKEN = os.environ.get("")
 
     SESSION_NAME = ":memory:"
 
-    API_ID = int(os.environ.get("API_ID"))
+    API_ID = int(os.environ.get(""))
 
-    API_HASH = os.environ.get("API_HASH")
+    API_HASH = os.environ.get("")
 
     CLIENT_ID = os.environ.get("CLIENT_ID")
 
