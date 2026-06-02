@@ -7,7 +7,7 @@ id_pattern = re.compile(r'^.\d+$')
 
 class Config:
 
-    BOT_TOKEN = os.environ.get("")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
     SESSION_NAME = ":memory:"
 
@@ -19,7 +19,7 @@ class Config:
 
     CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 
-    BOT_OWNER = os.environ.get("8036555271")
+    BOT_OWNER = os.environ.get("BOT_OWNER")
 
     BOT_START_TIME = time.time()
     
