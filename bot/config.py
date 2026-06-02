@@ -13,7 +13,7 @@ class Config:
 
     API_ID = int(os.environ.get("API_ID"))
 
-    API_HASH = os.environ.get("dcf205da67a02806db1a22ed087d9f44")
+    API_HASH = os.environ.get("API_ID")
 
     CLIENT_ID = os.environ.get("CLIENT_ID")
 
