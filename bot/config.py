@@ -7,7 +7,7 @@ id_pattern = re.compile(r'^.\d+$')
 
 class Config:
 
-    BOT_TOKEN = os.environ.get("")
+    BOT_TOKEN = os.environ.get("8073548594:AAHVF6_pjFlCBVqmqvEqjPCxK0FyzZKAvOA")
 
     SESSION_NAME = ":memory:"
 
